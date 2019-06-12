@@ -1,0 +1,28 @@
+{
+
+  "manifest_version": 2,
+  "name": "Don't forget!",
+  "version": "1.0",
+
+  "description": "Adds a red border to all webpages matching mozilla.org.",
+
+  "icons": {
+    "48": "icons/border-48.png"
+  },
+  
+  "permissions": [
+    "bookmarks",
+    "tabs"
+  ],
+
+  "browser_action": {
+    "default_icon": "icons/border-48.png",
+    "default_title": "Bookmark it!"
+  },
+
+
+  "background": {
+    "page": "background-page.html"
+  }
+
+}
