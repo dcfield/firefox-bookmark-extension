@@ -1,18 +1,23 @@
 var currentTab;
 var currentBookmark;
 
+// For testing, open the Browser Console
+
+console.log('hello');
 /*
  * Updates the browserAction icon to reflect whether the current page
  * is already bookmarked.
  */
 function updateIcon() {
+  console.log(currentBookmark);
+  
   browser.browserAction.setIcon({
     path: currentBookmark ? {
       19: "icons/border-48.png",
       38: "icons/border-48.png"
     } : {
-      19: "icons/border-48.png",
-      38: "icons/border-48.png"
+      19: "icons/telephone.png",
+      38: "icons/telephone.png"
     },
     tabId: currentTab.id
   });
@@ -27,11 +32,14 @@ function updateIcon() {
  * Add or remove the bookmark on the current page.
  */
 function toggleBookmark() {
+  console.log(currentBookmark);
+  
   if (currentBookmark) {
     browser.bookmarks.remove(currentBookmark.id);
   } else {
     browser.bookmarks.create({title: currentTab.title, url: currentTab.url});
   }
+  
 }
 
 browser.browserAction.onClicked.addListener(toggleBookmark);

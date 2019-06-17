@@ -1,13 +1,13 @@
 {
 
   "manifest_version": 2,
-  "name": "Don't forget!",
+  "name": "Don't forget!!!",
   "version": "1.0",
 
-  "description": "Adds a red border to all webpages matching mozilla.org.",
+  "description": "Show random bookmark",
 
   "icons": {
-    "48": "icons/border-48.png"
+    "48": "icons/telephone.png"
   },
   
   "permissions": [
@@ -16,13 +16,13 @@
   ],
 
   "browser_action": {
-    "default_icon": "icons/border-48.png",
+    "default_icon": "icons/telephone.png",
     "default_title": "Bookmark it!"
   },
 
 
   "background": {
-    "page": "background-page.html"
+    "scripts": ["background-script.js"]
   }
 
 }
