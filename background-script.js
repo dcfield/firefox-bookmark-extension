@@ -1,6 +1,6 @@
 var currentTab;
 var currentBookmark;
-
+var folder = "From Google Chrome";
 // For testing, open the Browser Console
 
 console.log('hello');
@@ -9,7 +9,7 @@ console.log('hello');
  * is already bookmarked.
  */
 function updateIcon() {
-  console.log(currentBookmark);
+  //console.log(currentBookmark);
   
   browser.browserAction.setIcon({
     path: currentBookmark ? {
@@ -32,14 +32,68 @@ function updateIcon() {
  * Add or remove the bookmark on the current page.
  */
 function toggleBookmark() {
-  console.log(currentBookmark);
+  // console.log(currentBookmark);
   
   if (currentBookmark) {
     browser.bookmarks.remove(currentBookmark.id);
   } else {
-    browser.bookmarks.create({title: currentTab.title, url: currentTab.url});
+    //browser.bookmarks.create({title: currentTab.title, url: currentTab.url});
   }
+
+  randomBookmark();
   
+}
+
+function makeIndent(indentLength) {
+  return ".".repeat(indentLength);
+}
+
+function logItems(bookmarkItem, indent) {
+  if (bookmarkItem.url) {
+    
+    console.log(bookmarkItem);
+    //console.log(makeIndent(indent) + bookmarkItem.url);
+  } else if (bookmarkItem.title == folder) {
+    console.log(bookmarkItem.title);
+  } else {
+    console.log(bookmarkItem);
+    //console.log(makeIndent(indent) + "Folder");
+    indent++;
+  }
+  if (bookmarkItem.children) {
+    for (child of bookmarkItem.children) {
+      logItems(child, indent);
+    }
+  }
+  indent--;
+}
+
+function logTree(bookmarkItems) {
+  //console.log(bookmarkItems);
+  logItems(bookmarkItems[0], 0);
+}
+
+function onRejected(error) {
+  console.log(`An error: ${error}`);
+}
+
+function alertRandomBookmark(bookmarkItems) {
+  console.log(bookmarkItems);
+  bookmarkItems = bookmarkItems[0];
+  randomGenerator = Math.floor(Math.random()*bookmarkItems.length);
+  randomBookmark = bookmarkItems[randomGenerator];
+}
+
+/*
+ * Choose a random bookmark from the collection
+ */
+function randomBookmark() {
+  subTreeId = "From Google Chrome"
+  bookmarksFolder = browser.bookmarks.getSubTree(subTreeId);
+  // Returns a promise
+  allBookmarksTree = browser.bookmarks.getTree();
+  //allBookmarksTree.then(logTree, onRejected).then(alertRandomBookmark, onRejected);
+  allBookmarksTree.then(alertRandomBookmark, onRejected);
 }
 
 browser.browserAction.onClicked.addListener(toggleBookmark);
