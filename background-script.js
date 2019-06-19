@@ -1,6 +1,7 @@
 var currentTab;
 var currentBookmark;
 var folder = "From Google Chrome";
+var bookmarks = [];
 // For testing, open the Browser Console
 
 console.log('hello');
@@ -77,11 +78,37 @@ function onRejected(error) {
   console.log(`An error: ${error}`);
 }
 
-function alertRandomBookmark(bookmarkItems) {
-  console.log(bookmarkItems);
-  bookmarkItems = bookmarkItems[0];
-  randomGenerator = Math.floor(Math.random()*bookmarkItems.length);
-  randomBookmark = bookmarkItems[randomGenerator];
+function extractBookmarksFromTree(bookmarkItems) {
+  extractBookmarksFromTreeNode(bookmarkItems[0]);
+  console.log("All bookmarks extracted");
+}
+
+function extractBookmarksFromTreeNode(bookmarkItem) {
+  //console.log(bookmarkItem);
+  //console.log("Extracting bookmarks from tree");
+  if (bookmarkItem.url) {
+    //console.log("This is a url:" + bookmarkItem.url);
+    bookmarks.push(bookmarkItem.url);
+    //console.log(bookmarks);
+    //console.log(makeIndent(indent) + bookmarkItem.url);
+  }
+  if (bookmarkItem.children) {
+    //console.log("This is another folder");
+    for (child of bookmarkItem.children) {
+      //console.log("Extracting the bookmarks from this folder");
+      extractBookmarksFromTreeNode(child);
+    }
+  }
+  //console.log("Bookmarks:" + bookmarks);
+  
+}
+
+function alertRandomBookmark() {
+
+  console.log("Alerting random bookmark");
+  random = Math.floor(Math.random() * bookmarks.length);
+  //alert(bookmarks[random]);
+  alert("Hello");
 }
 
 /*
@@ -93,7 +120,10 @@ function randomBookmark() {
   // Returns a promise
   allBookmarksTree = browser.bookmarks.getTree();
   //allBookmarksTree.then(logTree, onRejected).then(alertRandomBookmark, onRejected);
-  allBookmarksTree.then(alertRandomBookmark, onRejected);
+  allBookmarksTree.then(extractBookmarksFromTree, onRejected).then(alertRandomBookmark);
+  //console.log(bookmarks);
+
+  alertRandomBookmark();
 }
 
 browser.browserAction.onClicked.addListener(toggleBookmark);
