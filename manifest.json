@@ -17,12 +17,14 @@
 
   "browser_action": {
     "default_icon": "icons/telephone.png",
-    "default_title": "Bookmark it!"
+    "default_title": "Bookmark it!",
+    "default_popup": "popup/show_bookmark.html"
   },
 
 
   "background": {
     "scripts": ["background-script.js"]
   }
-
+  
+  
 }

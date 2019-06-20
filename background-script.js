@@ -4,7 +4,6 @@ var folder = "From Google Chrome";
 var bookmarks = [];
 // For testing, open the Browser Console
 
-console.log('hello');
 /*
  * Updates the browserAction icon to reflect whether the current page
  * is already bookmarked.
@@ -80,7 +79,7 @@ function onRejected(error) {
 
 function extractBookmarksFromTree(bookmarkItems) {
   extractBookmarksFromTreeNode(bookmarkItems[0]);
-  console.log("All bookmarks extracted");
+  //console.log("All bookmarks extracted");
 }
 
 function extractBookmarksFromTreeNode(bookmarkItem) {
@@ -105,10 +104,10 @@ function extractBookmarksFromTreeNode(bookmarkItem) {
 
 function alertRandomBookmark() {
 
-  console.log("Alerting random bookmark");
+  //console.log("Alerting random bookmark");
   random = Math.floor(Math.random() * bookmarks.length);
-  //alert(bookmarks[random]);
-  alert("Hello");
+ // console.log(bookmarks[random]);
+  return bookmarks[random];
 }
 
 /*
@@ -123,7 +122,7 @@ function randomBookmark() {
   allBookmarksTree.then(extractBookmarksFromTree, onRejected).then(alertRandomBookmark);
   //console.log(bookmarks);
 
-  alertRandomBookmark();
+  return alertRandomBookmark();
 }
 
 browser.browserAction.onClicked.addListener(toggleBookmark);
@@ -176,3 +175,4 @@ browser.windows.onFocusChanged.addListener(updateActiveTab);
 
 // update when the extension loads initially
 updateActiveTab();
+randomBookmark();
