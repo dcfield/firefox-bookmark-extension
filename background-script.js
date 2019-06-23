@@ -88,7 +88,8 @@ function extractBookmarksFromTreeNode(bookmarkItem) {
   if (bookmarkItem.url) {
     //console.log("This is a url:" + bookmarkItem.url);
     bookmarks.push(bookmarkItem.url);
-    //console.log(bookmarks);
+    
+    //console.log(bookmarkItem);
     //console.log(makeIndent(indent) + bookmarkItem.url);
   }
   if (bookmarkItem.children) {
@@ -176,3 +177,4 @@ browser.windows.onFocusChanged.addListener(updateActiveTab);
 // update when the extension loads initially
 updateActiveTab();
 randomBookmark();
+//console.log(bookmarks);
