@@ -10,11 +10,21 @@
     "48": "icons/telephone.png"
   },
   
+  "options_ui": {
+    "page": "options/options.html"
+  },
+
   "permissions": [
     "bookmarks",
-    "tabs"
+    "tabs",
+    "storage"
   ],
-
+  
+  "applications": {
+    "gecko": {
+      "id": "addon@example.com"
+    }
+  },
   "browser_action": {
     "default_icon": "icons/telephone.png",
     "default_title": "Bookmark it!",
