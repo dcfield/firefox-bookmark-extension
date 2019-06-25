@@ -120,7 +120,7 @@ function randomBookmark() {
   // Returns a promise
   allBookmarksTree = browser.bookmarks.getTree();
   //allBookmarksTree.then(logTree, onRejected).then(alertRandomBookmark, onRejected);
-  allBookmarksTree.then(extractBookmarksFromTree, onRejected).then(alertRandomBookmark);
+  allBookmarksTree.then(extractBookmarksFromTree, onRejected);
   //console.log(bookmarks);
 
   return alertRandomBookmark();
