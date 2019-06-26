@@ -1,5 +1,6 @@
 function updatePopup(bookmark) {
   document.getElementById("bookmark").innerHTML = bookmark;
+  document.getElementById("bookmark_link").href = bookmark;
 }
 
 function onGotBackgroundPage(page) {
