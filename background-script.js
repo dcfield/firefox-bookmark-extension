@@ -68,6 +68,10 @@ function logItems(bookmarkItem, indent) {
   indent--;
 }
 
+function getAllBookmarks() {
+  return bookmarks;
+}
+
 function logTree(bookmarkItems) {
   //console.log(bookmarkItems);
   logItems(bookmarkItems[0], 0);
@@ -111,6 +115,8 @@ function alertRandomBookmark() {
   return bookmarks[random];
 }
 
+
+
 /*
  * Choose a random bookmark from the collection
  */
@@ -150,7 +156,7 @@ function updateActiveTab(tabs) {
           updateIcon();
         });
       } else {
-        console.log(`Bookmark it! does not support the '${currentTab.url}' URL.`)
+        //console.log(`Bookmark it! does not support the '${currentTab.url}' URL.`)
       }
     }
   }
