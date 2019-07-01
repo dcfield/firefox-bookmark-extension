@@ -1,15 +1,24 @@
 html, body {
   width: 500px;
+  background-color: #232931;
+  color: #eeeeee;
 }
 
 .hidden {
   display: none;
 }
 
+a {
+  color: #4ecca3;
+  background-color: #393e46;
+  padding: 4px;
+  text-decoration: none;
+}
+
 .button {
   margin: 3% auto;
   padding: 4px;
-  text-align: center;
+  text-align: left;
   font-size: 1.5em;
   cursor: pointer;
 }

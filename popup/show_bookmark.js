@@ -36,7 +36,9 @@ var randomBookmark = "";
 
 function updatePopup(bookmark) {
   document.getElementById("bookmark").innerHTML = bookmark;
+  document.getElementById("bookmark").href = bookmark;
   document.getElementById("bookmark_link").href = bookmark;
+  document.getElementById("bookmark").href = bookmark;
   //getPageTitle(bookmark);
 }
 function onGotBackgroundPage(page) {

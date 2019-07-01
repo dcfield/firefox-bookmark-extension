@@ -1,13 +1,13 @@
 {
 
   "manifest_version": 2,
-  "name": "Don't forget!!!",
+  "name": "Bookmark Reminder",
   "version": "1.0",
 
-  "description": "Show random bookmark",
+  "description": "Keep forgetting all those bookmarks? No more!",
 
   "icons": {
-    "48": "icons/telephone.png"
+    "48": "icons/icon_bookmark.png"
   },
   
   "options_ui": {
@@ -26,8 +26,8 @@
     }
   },
   "browser_action": {
-    "default_icon": "icons/telephone.png",
-    "default_title": "Bookmark it!",
+    "default_icon": "icons/icon_bookmark.png",
+    "default_title": "Bookmark Reminder",
     "default_popup": "popup/show_bookmark.html"
   },
 
