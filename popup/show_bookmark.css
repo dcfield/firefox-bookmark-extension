@@ -8,17 +8,19 @@ html, body {
   display: none;
 }
 
-a {
+.button {
   color: #4ecca3;
   background-color: #393e46;
   padding: 4px;
   text-decoration: none;
 }
 
-.button {
+.bookmark_link {
   margin: 3% auto;
   padding: 4px;
   text-align: left;
   font-size: 1.5em;
   cursor: pointer;
+  text-decoration: none;
+  color: #eeeeee;
 }
