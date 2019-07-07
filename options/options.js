@@ -4,15 +4,33 @@ function onRejected(error) {
   console.log(`An error: ${error}`);
 }
 
+function updateSettingsWithBookmarks() {
+  console.log("updating sookmarks setting");
+  let folderElement = document.getElementById("folders");
+  let bookmarksHtml = "<ul>";
+  for(i = 0; i < bookmarks.length; i++) {
+    //console.log("Insie for loop");
+    bookmarksHtml += "<li>";
+    bookmarksHtml += bookmarks[i];
+    bookmarksHtml += "</li>"
+  }
+
+  bookmarksHtml += "</ul>";
+  folderElement.innerHTML = bookmarksHtml;
+}
+
 function getBookmarks() {
   allBookmarksTree = browser.bookmarks.getTree();
-  allBookmarksTree.then(extractBookmarksFromTree, onRejected);
-  console.log(bookmarks);
+  allBookmarksTree.then(extractBookmarksFromTree, onRejected)
+    .then(updateSettingsWithBookmarks);
+  //console.log(bookmarks);
 }
 
 function extractBookmarksFromTree(bookmarkItems) {
-  extractBookmarksFromTreeNode(bookmarkItems[0]);
-  console.log("All bookmarks extracted");
+ return new Promise(function(resolve) {
+   resolve(extractBookmarksFromTreeNode(bookmarkItems[0]));
+   console.log("All bookmarks extracted");
+ });
 }
 
 function extractBookmarksFromTreeNode(bookmarkItem) {
