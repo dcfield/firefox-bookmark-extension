@@ -34,8 +34,20 @@ function getPageTitle(bookmark) {
 
 var randomBookmark = "";
 
+function formatBookmark(bookmark) {
+  let urlObject = new URL(bookmark);
+  let host = urlObject.host;
+  let highlightedHost = `<span class="highlight">${host}</span>`;
+
+  let pathname = urlObject.pathname;
+  let url = highlightedHost + pathname;
+  return url;
+}
+
 function updatePopup(bookmark) {
-  document.getElementById("bookmark").innerHTML = bookmark;
+  let formattedBookmark = formatBookmark(bookmark);
+
+  document.getElementById("bookmark").innerHTML = formattedBookmark;
   document.getElementById("bookmark").href = bookmark;
   document.getElementById("bookmark_link").href = bookmark;
   document.getElementById("bookmark").href = bookmark;
@@ -66,7 +78,7 @@ var backgroundPage = browser.runtime.getBackgroundPage();
 backgroundPage.then(onGotBackgroundPage, onError);
 
 document.getElementById("bookmark_reload").addEventListener("click", function() {
-  //console.log("These are the bookmarks");
+  console.log("Reloading bookmarks");
   //console.log(bookmarks);
   newRandomBookmark = getNewRandomBookmark();
   updatePopup(newRandomBookmark);
