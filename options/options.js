@@ -11,6 +11,7 @@ function updateSettingsWithBookmarks() {
   for(i = 0; i < bookmarks.length; i++) {
     //console.log("Insie for loop");
     bookmarksHtml += "<li>";
+    bookmarksHtml += `<input type="checkbox" name="bookmark" value="">`
     bookmarksHtml += bookmarks[i];
     bookmarksHtml += "</li>"
   }
@@ -21,9 +22,36 @@ function updateSettingsWithBookmarks() {
 
 function getBookmarks() {
   allBookmarksTree = browser.bookmarks.getTree();
-  allBookmarksTree.then(extractBookmarksFromTree, onRejected)
+  allBookmarksTree.then(extractBookmarkFoldersFromTree, onRejected)
     .then(updateSettingsWithBookmarks);
   //console.log(bookmarks);
+}
+
+function extractBookmarkFoldersFromTree(bookmarkItems) {
+  return new Promise(function(resolve) {
+    resolve(extractFoldersFromTreeNode(bookmarkItems[0]));
+    console.log("All bookmark folders extracted");
+  });
+}
+
+function extractFoldersFromTreeNode(bookmarkItem) {
+  //console.log(bookmarkItem);
+  //console.log("Extracting bookmarks from tree");
+  if (bookmarkItem.type == "folder") {
+    //console.log("This is a url:" + bookmarkItem.url);
+    bookmarks.push(bookmarkItem.title);
+
+    //console.log(bookmarkItem);
+  }
+  if (bookmarkItem.children) {
+    //console.log("This is another folder");
+    for (child of bookmarkItem.children) {
+      //console.log("Extracting the bookmarks from this folder");
+      extractFoldersFromTreeNode(child);
+    }
+  }
+  //console.log("Bookmarks:" + bookmarks);
+
 }
 
 function extractBookmarksFromTree(bookmarkItems) {
